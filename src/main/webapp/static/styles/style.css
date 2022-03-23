@@ -1,9 +1,273 @@
-.container {
-background-color:gray;
-padding:10px;
+
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('../../fonts/lato-v22-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../fonts/lato-v22-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* lato-700 - latin */
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''),
+         url('../../fonts/lato-v22-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../fonts/lato-v22-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* lato-900 - latin */
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+         url('../../fonts/lato-v22-latin-900.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+         url('../../fonts/lato-v22-latin-900.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }*
+{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+img {
+    height: 100%;
+    width: 100%;
 }
 
-.login-row {
-display:block;
-margin-bottom:10px;
+html,body {
+    height: auto;
+    width: 100%;
+    font-size: 14px;
+    
+}
+main{
+    display: flex;
+    background-color:  #5E5A5A;
+}
+header{
+    background-color: #312E2E;
+    width: 100%;
+    height: 152px;
+    display:flex ;
+    justify-content: space-between;
+}
+.position-logo{
+    height: 152px;
+    width: 300px;
+}
+.form-button-en{
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 30px;
+    text-transform: uppercase;
+ }
+ .form-button-ru{
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 30px;
+    text-transform: uppercase;
+ }
+ .form-button-by{
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    background-color: white;
+    border-radius: 30px;
+    text-transform: uppercase;
+ }
+ .language{
+    padding-top: 46px;
+    display: flex;
+ }
+ .position-menu-header{
+display: flex;
+ }
+ .position-en{
+    padding-right: 10px;
+ }
+ .position-by{
+    padding-right: 10px;
+ }
+ .position-ru{
+    padding-right: 10px;
+ }
+ .form-button-en:hover{
+    background-image: url(../../img/britan.png);
+    background-size: 70px;
+    background-position: center;
+    
+ }
+ .form-button-by:hover{
+    background-image: url(../../img/by-flag.jpg);
+    background-size: 110px;
+ }
+ .form-button-ru:hover{
+    background-image: url(../../img/Rus-flag.png);
+    background-size: 90px;
+ }
+ 
+ /* .username{
+
+ } */
+.exit{
+ width: 59px;
+ height: 53px;
+ padding-top: 50px;
+ padding-left: 100px;
+ margin-right: 52px;
+}
+.button-fitnes-programm{
+    width: 367px;
+    height: 79px;
+    border-radius: 38px;
+    background-color: #5E5A5A;
+}
+
+.fitnes-menu{
+    width: 490px;
+    height: 1000px;
+    background-color: #403A3A;
+    justify-content: s;
+}
+.position-button-programm{
+    padding: 121px 62px 65px 62px;
+}
+.form-button{
+    width: 367px;
+    height: 79px;
+    background-color:  #5E5A5A;
+    border-radius: 38px;
+    color: white;
+    font-size: 36px;
+}
+.form-button:hover{
+    background-color: #473636;
+}
+.form-button:active{
+    background-color: #2b1d1d;
+}
+.button-order-position{
+    padding-right: 62px;
+    padding-left: 62px;
+    padding-bottom: 65px;
+}
+.position-button-history{
+    padding-right: 62px;
+    padding-left: 62px;
+    
+}
+.hello{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 400px;
+    margin-left: 470px;
+   
+}
+.style-hello{
+    color: white;
+    font-size: 48px;
+    font-weight: 400px;
+    font-style: normal;
+}
+.order{
+    margin-left: 41px;
+    margin-top: 26px;
+    font-weight: 400px;
+    font-size: 36px;
+}
+.form-input-order{
+    width: 297px;
+    height: 55px;
+    font-size: 30px;
+}
+.form-order{
+    padding-top: 33px;
+}
+.buttton-calculate-cost{
+    width: 297px;
+    height: 55px;
+    font-size: 20px;
+    border-radius: 38px;
+    background-color:  #403A3A;
+    color: white;
+    font-weight: 500px;
+}
+.position-calculate-button{
+    margin-top: 33px;
+}
+.position-pay-button{
+    margin-top: 24px;
+}
+.buttton-calculate-cost:hover{
+    background-color: #292424;
+}
+.program-list{
+    margin-top: 26px;
+    margin-left: 88px;
+    font-family: 'Lato';
+    
+
+}
+
+.information-about-program{
+    font-family:'Lato';
+    font-weight: 400px;
+    font-style: normal;
+    font-size: 48px;
+}
+.positiont-list{
+    display: flex;
+}
+.data-list{
+    font-weight: 400px;
+    font-size: 36px;
+    margin-top: 30px;
+    margin-left: 45px;
+}
+.data-list-history{
+    font-weight: 400px;
+    font-size: 36px;
+    margin-top: 30px;
+    margin-left: 4px;
+}
+.list-information{
+    /* width: 205px;
+    height: 43px; */
+   
+    margin-top: 50px;
+     
+    font-weight: 400px;
+    font-size: 36px;
+}
+.list{
+    padding-top: 20px;
+}
+.button-submit-list{
+    width: 208px;
+    height: 55px;
+    font-family: 'Lato';
+    font-size: 36px;
+    font-style: normal;
+    background-color: #403A3A;
+    color: white;
+    border-radius: 38px;
+    font-weight: 400px;
+}
+.position-button-submit-list{
+    margin-top: 140px;
+}
+.button-submit-list:hover{
+ background-color: #704a4a;
 }
