@@ -1,4 +1,6 @@
+
 <%@ page isELIgnored="false" pageEncoding="UTF-8" language="java" %>
+
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -40,10 +42,10 @@
 <body>
 <header>
     <div class="position-logo">
-        <a href="/index.html"><img src="img/logo1.png" alt=""></a>
+        <a href="controller?command=showMainPage"><img src="img/logo1.png" alt=""></a>
     </div>
     <div class="position-menu-header">
-        <form method="post" action="controller?command=languageChange">
+         <form method="post" action="controller?command=languageChange">
             <div class="language">
                 <div class="position-ru">
                     <button type="submit" name="locale" value="ru_RU" class="form-button-ru">RU</button>
@@ -58,7 +60,7 @@
             </div>
         </form>
         <div class="exit">
-            <a href="/login.html"> <img src="img/Vector.png" alt=""> </a>
+            <a href="controller?command=logout"> <img src="img/Vector.png" alt=""> </a>
         </div>
     </div>
 
@@ -66,7 +68,7 @@
 <main>
     <div class="fitnes-menu">
         <div class="position-button-programm">
-            <a href="#"><button type="submit" class="form-button">${myprogram}</button></a>
+            <a href="controller?command=showProgramPage"><button type="submit" class="form-button">${myprogram}</button></a>
         </div>
         <div class="button-order-position">
             <a href="controller?command=order"><button type="submit" class="form-button">${order}</button></a>
@@ -75,6 +77,7 @@
             <a href="controller?command=history"> <button type="submit" class="form-button">${history}</button></a>
         </div>
     </div>
+    <c:if test="${program != null}">
     <div class="program-list">
         <p class="information-about-program">
             ${customHeader}
@@ -85,25 +88,31 @@
                 <p class="list">${end}</p>
                 <p class="list">${diet}</p>
                 <p class="list">${exercises}</p>
-                <div class="position-button-submit-list">
-                    <button class="button-submit-list">${rescind}</button>
-                </div>
+                <c:if test="${program.programState} == FINISHED">
+                    <div class="position-button-submit-list">
+                        <button class="button-submit-list">${rescind}</button>
+                    </div>
+                </c:if>
             </div>
             <div class="data-list">
                 <p class="list">${program.startDate}</p>
                 <p class="list">${program.endDate}</p>
                 <p class="list">${hasDiet}</p>
-                <p class="list">
                 <ul>
-                    <li>отжимания</li>
-                    <li>приседания</li>
-                    <li>подтягивания</li>
+                <c:forEach var="position" begin="0" end="${program.exercises.size() - 1}" step="1">
+                    <li>${program.exercises.get(position).name}</li>
+                </c:forEach>
                 </ul>
-                </p>
             </div>
         </div>
         <div></div>
     </div>
+    </c:if>
+    <c:if test="${program == null}">
+        <p class="information-about-program">
+               На данный момент у вас нет программы :(
+        </p>
+    </c:if>
 </main>
 </body>
 </html>

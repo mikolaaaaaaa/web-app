@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class ClientService {
+public class UserService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 

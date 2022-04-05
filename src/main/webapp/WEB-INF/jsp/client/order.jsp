@@ -57,7 +57,7 @@
             </div>
         </form>
         <div class="exit">
-            <a href="/login.html"> <img src="img/Vector.png" alt=""> </a>
+            <a href="controller?command=logout"> <img src="img/Vector.png" alt=""> </a>
         </div>
     </div>
 
@@ -80,14 +80,15 @@
         <p>
             ${customHeader}
         </p>
+        <form action="controller?command=calculateOrderPrice" method="post">
         <div class="form-order">
-            <form action="#">
-                <input class="form-input-order" type="number" >
-            </form>
+                <input class="form-input-order" type="number" name="trainingCount">
         </div>
         <div class="position-calculate-button">
-            <button class="buttton-calculate-cost">${calculate}</button>
+            <button type="submit" class="buttton-calculate-cost">${calculate}</button>
         </div>
+        </form>
+        <div>${orderCoast}</div>
         <div class="position-pay-button">
             <button class="buttton-calculate-cost">${pay}</button>
         </div>

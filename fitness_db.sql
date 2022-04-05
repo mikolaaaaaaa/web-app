@@ -1,38 +1,59 @@
-create database fitness_center;
-use fitness_center;
+use third_fc;
 
-create table `user` (
-id int primary key auto_increment,
-name varchar(50) not null,
-surname varchar(50) not null,
-login varchar(50) not null,
-password varchar(50) not null,
-user_is enum('trainer','client') default 'client',
-user_type enum('usual','corporate','regular') default 'usual'
+create table if not exists `client`
+(
+    id       bigint primary key auto_increment,
+    name     varchar(50)                          not null,
+    surname  varchar(50)                          not null,
+    login    varchar(50)                          not null,
+    password varchar(50)                          not null,
+    type     enum ('usual','corporate','regular') not null default 'usual',
+    gender   enum ('male','female')               not null
 );
 
-create table `order` (
-id int primary key auto_increment,
-user_id int not null,
-date date not null,
-trainer_type enum('personal','usual') default 'usual',
-foreign key (user_id) references `user`(id)
+create table if not exists `trainer`
+(
+    id            bigint primary key                not null,
+    name          varchar(50)                       not null,
+    surname       varchar(50)                       not null,
+    login         varchar(50)                       not null,
+    password      varchar(50)                       not null,
+    qualification enum ('junior','middle','senior') not null,
+    gender        enum ('male','female')            not null
 );
 
-create table `program`(
-id int primary key auto_increment,
-order_id int not null,
-start date not null,
-end date not null, 
-exercise_type enum('easy','medium','hard') not null default 'easy',
-food_type enum('low-calorie diet','high-calorie diet','usual diet') not null default 'usual diet',
-price decimal(10,2) not null,
-foreign key (order_id) references `order`(id)
+create table if not exists `order`
+(
+    id           bigint primary key auto_increment,
+    client_id    bigint                    not null,
+    trainer_id   bigint                    not null,
+    date         date                      not null,
+    trainer_type enum ('personal','usual') not null default 'usual',
+    foreign key (client_id) references `client` (id),
+    foreign key (trainer_id) references `trainer` (id)
 );
 
-create table `feedback`(
-id int primary key auto_increment,
-message text not null,
-order_id int not null,
-foreign key (order_id) references `order`(id)
+create table if not exists `program`
+(
+    id       bigint primary key auto_increment,
+    order_id bigint  not null,
+    start    date    not null,
+    end      date    not null,
+    has_diet tinyint not null,
+    feedback mediumtext,
+    foreign key (order_id) references `order` (id)
+);
+
+create table if not exists `exercise`
+(
+    id   bigint primary key auto_increment,
+    name varchar(50) not null
+);
+
+create table if not exists `program_exercise`
+(
+    program_id  bigint,
+    exercise_id bigint,
+    foreign key (program_id) references `program` (id),
+    foreign key (exercise_id) references `exercise` (id)
 );

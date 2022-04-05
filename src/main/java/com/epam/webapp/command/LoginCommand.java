@@ -3,7 +3,7 @@ package com.epam.webapp.command;
 import com.epam.webapp.entity.Client;
 import com.epam.webapp.entity.Trainer;
 import com.epam.webapp.exception.ServiceException;
-import com.epam.webapp.service.ClientService;
+import com.epam.webapp.service.UserService;
 import com.epam.webapp.service.TrainerService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,7 +17,7 @@ public class LoginCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final TrainerService trainerService = new TrainerService();
-    private final ClientService clientService = new ClientService();
+    private final UserService clientService = new UserService();
 
     private static final String LOGIN_PARAMETER = "login";
     private static final String PASSWORD_PARAMETER = "password";

@@ -1,6 +1,7 @@
 package com.epam.webapp.command;
 
 public class CommandFactory {
+
     public Command create(String command) {
         switch (command) {
             case "login" -> {
@@ -16,13 +17,22 @@ public class CommandFactory {
                 return new ProgramCommand();
             }
             case "history" -> {
-                return new HistoryCommand();
+                return new ShowHistoryPageCommand();
             }
             case "showMainPage" -> {
-                return new ShowMainPage();
+                return new ShowMainPageCommand();
             }
             case "showProgramPage" -> {
-                return new ShowProgramPage();
+                return new ShowProgramPageCommand();
+            }
+            case "logout" -> {
+                return new LogoutCommand();
+            }
+            case "showHistoryProgram" -> {
+                return new ShowFinishedProgramPageCommand();
+            }
+            case "calculateOrderPrice" -> {
+                return new CalculateOrderPriceCommand();
             }
             default -> {
                  throw new IllegalArgumentException("Unknown command = " + command);

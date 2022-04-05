@@ -13,7 +13,11 @@ import java.util.List;
 public class ExerciseDaoImpl extends AbstractDao<Exercise> implements ExerciseDao {
 
     private static final String SQL_SELECT_FIND_EXERCISE_BY_PROGRAM_ID =
-            "select * from `program_exercise` where program_id = ?";
+            """
+               SELECT * FROM `program_exercise`
+               join `exercise` on exercise.id = program_exercise.exercise_id
+               where program_id = ?
+               """;
 
     public ExerciseDaoImpl(Connection connection) {
         super(connection, new ExerciseRowMapperImpl());

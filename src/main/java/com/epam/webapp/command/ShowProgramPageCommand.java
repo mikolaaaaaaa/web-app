@@ -8,14 +8,16 @@ import com.epam.webapp.service.ProgramService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 import java.util.Optional;
 
-public class ShowProgramPage implements Command {
+public class ShowProgramPageCommand implements Command {
 
     ProgramService service = new ProgramService();
 
     private static final String PROGRAM_PAGE_VALUE = "WEB-INF/jsp/client/program.jsp";
     private static final String CLIENT_ATTRIBUTE_KEY = "user";
+    private static final String CLIENT_PROGRAM_ID_KEY = "programId";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {

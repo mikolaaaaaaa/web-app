@@ -12,20 +12,23 @@ public class Program extends Entity {
     private boolean hasDiet;
     private List<Exercise> exercises = new ArrayList<>();
     private String feedback = "";
+    private ProgramState programState;
 
     public static final String ORDER_ID = "order_id";
     public static final String START = "start";
     public static final String END = "end";
     public static final String HAS_DIET = "has_diet";
     public static final String FEEDBACK = "feedback";
+    public static final String STATE = "state";
 
-    public Program(long id, int orderId, String startDate, String endDate, boolean hasDiet, String feedback) {
+    public Program(long id, int orderId, String startDate, String endDate, boolean hasDiet, String feedback,ProgramState programState) {
         super(id);
         this.orderId = orderId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.hasDiet = hasDiet;
         this.feedback = feedback;
+        this.programState = programState;
     }
 
     public int getOrderId() {
@@ -76,6 +79,14 @@ public class Program extends Entity {
         this.exercises = exercises;
     }
 
+    public ProgramState getProgramState() {
+        return programState;
+    }
+
+    public void setProgramState(ProgramState programState) {
+        this.programState = programState;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,6 +118,8 @@ public class Program extends Entity {
                 .append(", endDate='").append(endDate).append('\'')
                 .append(", hasDiet=").append(hasDiet)
                 .append(", feedback='").append(feedback).append('\'')
+                .append(", exercises'").append(exercises)
+                .append(", programState'").append(programState)
                 .append('}')
                 .toString();
     }

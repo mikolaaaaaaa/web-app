@@ -55,7 +55,7 @@
         </div>
         </form>
         <div class="exit">
-            <a href="login.html"> <img src="img/Vector.png" alt=""> </a>
+            <a href="controller?command=logout"> <img src="img/Vector.png" alt=""> </a>
         </div>
     </div>
 

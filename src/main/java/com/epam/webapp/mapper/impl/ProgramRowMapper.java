@@ -2,6 +2,7 @@ package com.epam.webapp.mapper.impl;
 
 import com.epam.webapp.entity.Entity;
 import com.epam.webapp.entity.Program;
+import com.epam.webapp.entity.ProgramState;
 import com.epam.webapp.mapper.RowMapper;
 
 import java.sql.ResultSet;
@@ -17,13 +18,15 @@ public class ProgramRowMapper implements RowMapper<Program> {
         String endDate = resultSet.getString(Program.END);
         boolean hasDiet = resultSet.getBoolean(Program.HAS_DIET);
         String feedback = resultSet.getString(Program.FEEDBACK);
+        ProgramState programState = ProgramState.valueOf(resultSet.getString(Program.STATE).toUpperCase());
 
         return new Program(id,
                 orderId,
                 startDate,
                 endDate,
                 hasDiet,
-                feedback
+                feedback,
+                programState
         );
     }
 

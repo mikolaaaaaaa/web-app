@@ -1,3 +1,4 @@
+<%--@elvariable id="program" type="com.epam.webapp.entity.Program"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Mikola
@@ -5,6 +6,7 @@
   Time: 16:07
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page isELIgnored="false" pageEncoding="UTF-8" language="java" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -14,7 +16,7 @@
     <c:set var="locale" value="ru_RU" scope="session"/>
 </c:if>
 
-<% session.setAttribute("currentPage","history.jsp");%>
+<% session.setAttribute("currentPage", "history.jsp");%>
 
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -31,7 +33,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>history</title>
 
-    <link rel="stylesheet" href="static/styles/style.css"></head>
+    <link rel="stylesheet" href="static/styles/style.css">
+</head>
 <body>
 <header>
     <div class="position-logo">
@@ -53,7 +56,7 @@
             </div>
         </form>
         <div class="exit">
-            <a href="/login.html"> <img src="img/Vector.png" alt=""> </a>
+            <a href="controller?command=logout"> <img src="img/Vector.png" alt=""> </a>
         </div>
     </div>
 
@@ -63,35 +66,38 @@
 
     <div class="fitnes-menu">
         <div class="position-button-programm">
-            <a href="controller?command=program"><button type="submit" class="form-button">${myprogram}</button></a>
+            <a href="controller?command=program">
+                <button type="submit" class="form-button">${myprogram}</button>
+            </a>
         </div>
         <div class="button-order-position">
-            <a href="controller?command=order"><button type="submit" class="form-button">${order}</button></a>
+            <a href="controller?command=order">
+                <button type="submit" class="form-button">${order}</button>
+            </a>
         </div>
         <div class="position-button-history">
-            <a href="#"> <button type="submit" class="form-button">${history}</button></a>
+            <a href="#">
+                <button type="submit" class="form-button">${history}</button>
+            </a>
         </div>
     </div>
     <div class="program-list">
-
-        <div class="positiont-list">
-            <div class="list-information">
-                <p>17.02.2022 - </p>
-                <p class="list">17.02.2022 - </p>
-                <p class="list">17.02.2022 - </p>
-            </div>
-            <div class="data-list-history">
-                <p class="list"> 17.03.2022</p>
-                <p class="list"> 17.03.2022</p>
-                <p class="list"> 17.03.2022</p>
-            </div>
-
+        <div class="list-information">
+            <c:forEach var="position" begin="0" end="${historyPrograms.size() - 1}" step="1">
+                <a href="controller?command=showHistoryProgram&programId=${historyPrograms.get(position).id}" class="list-information-link">
+                        <span class="list-information-date start-date">
+                                ${historyPrograms.get(position).startDate}
+                        </span>
+                    <span class="separator">
+                            &ndash;
+                        </span>
+                    <span class="list-information-date end-date">
+                            ${historyPrograms.get(position).endDate}
+                    </span>
+                </a>
+            </c:forEach>
         </div>
-        <div></div>
     </div>
-
-
-
 </main>
 </body>
 </html>

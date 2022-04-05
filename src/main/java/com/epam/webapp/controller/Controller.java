@@ -30,13 +30,13 @@ public class Controller extends HttpServlet {
         Command command = commandFactory.create(commandLine);
         try {
             CommandResult commandResult = command.execute(req,resp);
-            processComandResult(commandResult,req,resp);
+            processCommandResult(commandResult,req,resp);
         } catch (ServiceException e) {
             e.printStackTrace();
         }
     }
 
-    private void processComandResult(CommandResult commandResult, HttpServletRequest req, HttpServletResponse resp) {
+    private void processCommandResult(CommandResult commandResult, HttpServletRequest req, HttpServletResponse resp) {
        if (commandResult != null) {
            if (commandResult.isRedirect()) {
                try {

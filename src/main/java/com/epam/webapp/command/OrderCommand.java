@@ -12,6 +12,7 @@ public class OrderCommand implements Command{
     private final OrderService service = new OrderService();
 
     private static final String CLIENT_ORDER_PAGE = "WEB-INF/jsp/client/order.jsp";
+    private static final String CLIENT_PROGRAM_PAGE = "WEB-INF/jsp/client/program.jsp";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {

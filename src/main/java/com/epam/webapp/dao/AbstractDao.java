@@ -17,7 +17,7 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
     private final RowMapper<T> mapper;
     private final Connection connection;
 
-    private static final String FIND_ALL = "select * from";
+    private static final String FIND_ALL = "select * from ";
     private static final String WHERE = "where";
 
     public AbstractDao(Connection connection, RowMapper<T> rowMapper) {
@@ -70,13 +70,12 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
 
     @Override
     public Optional<T> findById(Long id) throws DaoException {
-        String table = getTableName();
-        return executeForSingleResult(FIND_ALL + table + WHERE + Long.toString(id), id);
+        return executeForSingleResult(FIND_ALL + getTableName() + WHERE + Long.toString(id), id);
     }
 
     @Override
     public List<T> findAll() throws DaoException {
-        return null;
+        return executeQuery(FIND_ALL + getTableName());
     }
 
     @Override
