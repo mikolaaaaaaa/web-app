@@ -98,6 +98,7 @@ public class ConnectionPool {
         for(int i = 0; i < numberOfConnections; i++) {
             ProxyConnection connection = availableConnections.poll();
             if (connection != null) {
+                LOGGER.info("connection {} really close", connection);
                 connection.reallyClose();
             }
         }

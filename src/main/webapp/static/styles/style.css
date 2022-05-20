@@ -36,7 +36,7 @@ img {
 }
 
 html,body {
-    height: auto;
+    height: 100%;
     width: 100%;
     font-size: 14px;
     
@@ -44,6 +44,7 @@ html,body {
 main{
     display: flex;
     background-color:  #5E5A5A;
+    height: 100%;
 }
 header{
     background-color: #312E2E;
@@ -56,6 +57,21 @@ header{
     height: 152px;
     width: 300px;
 }
+
+.position-calculate-button{
+    margin-top: 15px;
+}
+.trainer-checkbox{
+    width: 20px;
+    height: 20px;
+}
+.workout-counter{
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
 .form-button-en{
     width: 60px;
     height: 60px;
@@ -120,6 +136,7 @@ display: flex;
  /* .username{
 
  } */
+
 .exit{
  width: 59px;
  height: 53px;
@@ -136,7 +153,7 @@ display: flex;
 
 .fitnes-menu{
     width: 490px;
-    height: 1000px;
+    height: 100%;
     background-color: #403A3A;
     justify-content: center;
 }
@@ -195,6 +212,10 @@ display: flex;
 .form-order{
     padding-top: 33px;
 }
+.client-name{
+    display: flex;
+
+}
 .buttton-calculate-cost{
     width: 297px;
     height: 55px;
@@ -204,8 +225,50 @@ display: flex;
     color: white;
     font-weight: 500;
 }
+.position-button-submit-review{
+    margin-top: 30px;
+
+}
+.top-up{
+    width: 131px;
+    height: 38px;
+    font-size: 20px;
+    border-radius: 38px;
+    background-color: #75aa80;
+    color: white;
+    font-weight: 500;
+    margin-left: 20px;
+
+}
+.top-up:hover{
+    background-color: chartreuse;
+    color: black;
+}
+.balance{
+    align-items: center;
+    font-size: 30px;
+    color: white;
+    display: flex;
+    font-weight: 800;
+    margin-left: 790px;
+}
+.button-submit-review{
+    width: 297px;
+    height: 55px;
+    font-size: 20px;
+    border-radius: 38px;
+    background-color:  #403A3A;
+    color: white;
+    font-weight: 500;
+
+}
 .position-calculate-button{
-    margin-top: 33px;
+    margin-top: 10px;
+}
+.number-worcout{
+    margin-top: 10px;
+    display: flex;
+    padding-left: 125px;
 }
 .position-pay-button{
     margin-top: 24px;
@@ -216,10 +279,29 @@ display: flex;
 .program-list{
     padding: 76px 0 0 88px;
     font-family: 'Lato', sans-serif;
-    
-
+    font-size: 27px;
+}
+.form-review{
+    width: 580px;
+    height: 300px;
+    padding: 10px;
+    font-size: 25px;
+    border: 7px solid black;
+    border-radius: 20px;
+}
+.distance{
+    margin-right: 10px;
 }
 
+.lis{
+    padding-top: 20px;
+}
+.review{
+    margin-top: 70px;
+}
+.lis-star{
+    padding: 0;
+}
 .information-about-program{
     font-family:'Lato', sans-serif;
     font-weight: 400;
@@ -227,9 +309,8 @@ display: flex;
     font-size: 48px;
 }
 
-.positiont-list{
-    display: flex;
-}
+
+
 .data-list{
     display: flex;
     flex-direction: column;
@@ -238,14 +319,23 @@ display: flex;
     font-size: 36px;
     margin-left: 45px;
 }
+
 .data-list-history{
     font-weight: 400;
     font-size: 36px;
     margin-top: 30px;
     margin-left: 4px;
 }
-
+.list-information-date{
+    padding-top: 10px;
+}
+.d{
+    opacity: 0.7%;
+}
+откат
 .list-information{
+    width: 205px;
+    height: 43px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -253,9 +343,19 @@ display: flex;
     font-size: 36px;
 }
 
-/*.list{*/
-/*    padding-top: 20px;*/
-/*}*/
+/*
+.username{
+
+}
+*/
+
+.list{
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+}
+
 
 .list-information-link {
     color: black;
@@ -286,8 +386,41 @@ display: flex;
     font-weight: 400;
 }
 .position-button-submit-list{
-    margin-top: 140px;
+    margin-top: 40px;
 }
 .button-submit-list:hover{
  background-color: #704a4a;
+}
+
+.footer-about{
+    font-size: 30px;
+    border-left: 4px solid #098F8E;
+    margin-left: 300px;
+}
+.about{
+    margin-left: 300px;
+    padding-top: 10px;
+}
+.contact{
+    margin-right: 300px;
+}
+.footer-contact{
+    font-size: 30px;
+    border-left: 4px solid #098F8E;
+}
+.footer-message{
+    background-color: #201d1d;
+    display: flex;
+    justify-content: center;
+    padding: 52px  0 52px 0;
+}
+.fab{
+    color:#fff;
+    margin: 0px 20px 0 0;
+    font-size: 20px;
+}
+.line{
+    background-color: black;
+    height: 5px;
+    width: 100%;
 }

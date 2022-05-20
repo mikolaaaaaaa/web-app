@@ -1,5 +1,8 @@
 package com.epam.webapp.connection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
@@ -7,6 +10,8 @@ import java.util.concurrent.Executor;
 
 public class ProxyConnection implements Connection {
     private Connection connection;
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public ProxyConnection(Connection connection) {
         this.connection = connection;
@@ -61,7 +66,8 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public void close() throws SQLException {
+    public void close() {
+        LOGGER.info("connection return in pool");
         ConnectionPool.getInstance().returnConnection(this);
     }
 

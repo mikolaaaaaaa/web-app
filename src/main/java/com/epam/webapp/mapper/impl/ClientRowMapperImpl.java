@@ -3,6 +3,7 @@ package com.epam.webapp.mapper.impl;
 import com.epam.webapp.entity.Client;
 import com.epam.webapp.entity.ClientType;
 import com.epam.webapp.entity.EntityGender;
+import com.epam.webapp.entity.UserState;
 import com.epam.webapp.mapper.RowMapper;
 
 import java.sql.ResultSet;
@@ -19,15 +20,18 @@ public class ClientRowMapperImpl implements RowMapper {
         ClientType clientType = ClientType.valueOf(type.toUpperCase());
         String gender = resultSet.getString(Client.GENDER);
         EntityGender entityGender = EntityGender.valueOf(gender.toUpperCase());
-
-        Client client = new Client(
+        double balance = Double.parseDouble(resultSet.getString(Client.BALANCE));
+        String state = resultSet.getString(Client.STATE);
+        UserState userState = UserState.valueOf(state.toUpperCase());
+        return new Client(
                 id,
                 name,
                 surname,
                 login,
                 clientType,
-                entityGender
+                entityGender,
+                balance,
+                userState
         );
-        return client;
     }
 }

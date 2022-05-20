@@ -17,10 +17,16 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
     private final RowMapper<T> mapper;
     private final Connection connection;
 
-    private static final String FIND_ALL = "select * from ";
-    private static final String WHERE = "where";
+    private static final String FIND_ALL = "SELECT * FROM ";
+    private static final String WHERE_ID = " WHERE id = ?";
+    private static final String SQL_UPDATE = """
+            UPDATE ?
+            SET ? = ?
+            WHERE id = ?
+            """;
 
-    public AbstractDao(Connection connection, RowMapper<T> rowMapper) {
+
+    protected AbstractDao(Connection connection, RowMapper<T> rowMapper) {
         this.connection = connection;
         this.mapper = rowMapper;
     }
@@ -62,32 +68,36 @@ public abstract class AbstractDao<T extends Entity> implements Dao<T> {
 
     protected PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        for (int i = 1; i <= params.length; i++) {
-            preparedStatement.setObject(i, params[i - 1]);
-        }
-        return preparedStatement;
+            for (int i = 1; i <= params.length; i++) {
+                preparedStatement.setObject(i, params[i - 1]);
+            }
+            return preparedStatement;
     }
 
-    @Override
     public Optional<T> findById(Long id) throws DaoException {
-        return executeForSingleResult(FIND_ALL + getTableName() + WHERE + Long.toString(id), id);
+        return executeForSingleResult(FIND_ALL + getTableName() + WHERE_ID,id);
     }
 
-    @Override
     public List<T> findAll() throws DaoException {
         return executeQuery(FIND_ALL + getTableName());
     }
 
-    @Override
     public void save(T item) throws DaoException {
 
     }
 
-    @Override
     public void deleteById(Long id) throws DaoException {
 
     }
 
+    public void update(String sqlSelect, Object... params) throws DaoException {
+        executeUpdate(
+                sqlSelect,
+                params
+        );
+    }
+
     public abstract String getTableName();
+
 }
 

@@ -1,5 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
+import com.epam.webapp.constant.SessionConstant;
 import com.epam.webapp.entity.Client;
 import com.epam.webapp.entity.Program;
 import com.epam.webapp.exception.ServiceException;
@@ -10,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ShowHistoryPageCommand implements Command{
+public class ShowHistoryCommand implements Command {
 
     private final ProgramService service = new ProgramService();
     private static final String HISTORY_PAGE = "WEB-INF/jsp/client/history.jsp";
@@ -18,9 +21,15 @@ public class ShowHistoryPageCommand implements Command{
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         HttpSession session = req.getSession();
-        Client client = (Client) session.getAttribute("user");
+        Client client = (Client) session.getAttribute(SessionConstant.USER);
         List<Program> finishedPrograms = service.showFinishedClientPrograms(client.getId());
-        session.setAttribute("historyPrograms",finishedPrograms);
+        if (finishedPrograms.isEmpty()) {
+            session.setAttribute(SessionConstant.EMPTY_HISTORY, true);
+        }
+        else {
+            session.setAttribute(SessionConstant.EMPTY_HISTORY,false);
+            session.setAttribute(SessionConstant.HISTORY_PROGRAMS, finishedPrograms);
+        }
         return CommandResult.forward(HISTORY_PAGE);
     }
 }

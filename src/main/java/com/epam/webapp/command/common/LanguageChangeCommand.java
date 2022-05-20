@@ -1,12 +1,14 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.common;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
 import com.epam.webapp.exception.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class LanguageChangeCommand implements Command{
+public class LanguageChangeCommand implements Command {
 
     private static final String MAIN_PAGE_KEY = "main.jsp";
     private static final String MAIN_PAGE_VALUE = "WEB-INF/jsp/client/main.jsp";
@@ -18,13 +20,15 @@ public class LanguageChangeCommand implements Command{
     private static final String ORDER_PAGE_VALUE = "WEB-INF/jsp/client/order.jsp";
     private static final String PROGRAM_PAGE_KEY = "program.jsp";
     private static final String PROGRAM_PAGE_VALUE = "WEB-INF/jsp/client/program.jsp";
+    private static final String LOCALE_ATTRIBUTE_NAME = "locale";
+    private static final String CURRENT_PAGE_ATTRIBUTE_NAME = "currentPage";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
-        String newLanguage = req.getParameter("locale");
+        String newLanguage = req.getParameter(LOCALE_ATTRIBUTE_NAME);
         HttpSession httpSession = req.getSession();
-        httpSession.setAttribute("locale",newLanguage);
-        String currentPage = (String) httpSession.getAttribute("currentPage");
+        httpSession.setAttribute(LOCALE_ATTRIBUTE_NAME,newLanguage);
+        String currentPage = (String) httpSession.getAttribute(CURRENT_PAGE_ATTRIBUTE_NAME);
         String currentResultPage;
         switch (currentPage) {
             case MAIN_PAGE_KEY -> {

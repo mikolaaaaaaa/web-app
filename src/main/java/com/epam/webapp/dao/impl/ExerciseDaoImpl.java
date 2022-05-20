@@ -25,7 +25,7 @@ public class ExerciseDaoImpl extends AbstractDao<Exercise> implements ExerciseDa
 
     @Override
     public String getTableName() {
-        return null;
+        return Exercise.TABLE;
     }
 
     @Override

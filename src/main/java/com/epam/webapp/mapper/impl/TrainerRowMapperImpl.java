@@ -5,7 +5,6 @@ import com.epam.webapp.mapper.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
 
 public class TrainerRowMapperImpl implements RowMapper<Trainer> {
 
@@ -19,17 +18,17 @@ public class TrainerRowMapperImpl implements RowMapper<Trainer> {
         TrainerQualification trainerQualification = TrainerQualification.valueOf(qualification.toUpperCase());
         String gender = resultSet.getString(Client.GENDER);
         EntityGender entityGender = EntityGender.valueOf(gender.toUpperCase());
+        String state = resultSet.getString(Client.STATE);
+        UserState userState = UserState.valueOf(state.toUpperCase());
 
-        Trainer trainer = new Trainer(
+        return new Trainer(
                 id,
                 name,
                 surname,
                 login,
                 trainerQualification,
-                entityGender
+                entityGender,
+                userState
         );
-
-        return trainer;
     }
-
 }

@@ -3,6 +3,7 @@ package com.epam.webapp.controller;
 import com.epam.webapp.command.Command;
 import com.epam.webapp.command.CommandFactory;
 import com.epam.webapp.command.CommandResult;
+import com.epam.webapp.connection.ConnectionPool;
 import com.epam.webapp.exception.ServiceException;
 
 import javax.servlet.RequestDispatcher;
@@ -16,16 +17,16 @@ public class Controller extends HttpServlet {
     private final CommandFactory commandFactory = new CommandFactory();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         process(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         process(req, resp);
     }
 
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private void process(HttpServletRequest req, HttpServletResponse resp) {
         String commandLine = req.getParameter("command");
         Command command = commandFactory.create(commandLine);
         try {
@@ -55,6 +56,12 @@ public class Controller extends HttpServlet {
            }
        }
 
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        ConnectionPool.getInstance().closeAll();
     }
 
 

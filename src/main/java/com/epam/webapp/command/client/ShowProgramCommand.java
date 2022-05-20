@@ -1,5 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
+import com.epam.webapp.constant.SessionConstant;
 import com.epam.webapp.entity.Client;
 import com.epam.webapp.entity.Program;
 import com.epam.webapp.exception.ServiceException;
@@ -8,23 +11,20 @@ import com.epam.webapp.service.ProgramService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Enumeration;
 import java.util.Optional;
 
-public class ShowProgramPageCommand implements Command {
+public class ShowProgramCommand implements Command {
 
     ProgramService service = new ProgramService();
 
     private static final String PROGRAM_PAGE_VALUE = "WEB-INF/jsp/client/program.jsp";
-    private static final String CLIENT_ATTRIBUTE_KEY = "user";
-    private static final String CLIENT_PROGRAM_ID_KEY = "programId";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         HttpSession session = req.getSession();
-        Client client = (Client) session.getAttribute(CLIENT_ATTRIBUTE_KEY);
-        Optional<Program> program = service.showClientProgram(client.getId());
-        program.ifPresent(value -> session.setAttribute("program", value));
+        Client client = (Client) session.getAttribute(SessionConstant.USER);
+        Optional<Program> program = service.showProcessProgram(client.getId());
+        program.ifPresent(value -> session.setAttribute(SessionConstant.CLIENT_PROGRAM, value));
         return CommandResult.forward(PROGRAM_PAGE_VALUE);
     }
 

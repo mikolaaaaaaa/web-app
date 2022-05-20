@@ -1,3 +1,4 @@
+<%--@elvariable id="program" type="com.epam.webapp.entity.Program"--%>
 <%--
   Created by IntelliJ IDEA.
   User: Mikola
@@ -5,16 +6,18 @@
   Time: 16:07
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page isELIgnored="false" pageEncoding="UTF-8" language="java" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<jsp:useBean id="clientList" scope="session" type="java.util.List"/>
 
 <c:if test="${sessionScope.locale == null}">
     <c:set var="locale" value="ru_RU" scope="session"/>
 </c:if>
 
-<% session.setAttribute("currentPage", "order.jsp");%>
+<% session.setAttribute("currentPage", "clients.jsp");%>
 
 
 <fmt:setLocale value="${sessionScope.locale}"/>
@@ -23,22 +26,14 @@
 <fmt:message key="client.menu.order" var="order"/>
 <fmt:message key="client.menu.myprogram" var="myprogram"/>
 <fmt:message key="client.menu.history" var="history"/>
-<fmt:message key="client.order.header" var="customHeader"/>
-<fmt:message key="client.order.calculate" var="calculate"/>
-<fmt:message key="client.order.pay" var="pay"/>
-<fmt:message key="client.order.personal" var="personal"/>
-<fmt:message key="client.order.error_message.not_enough_money" var="not_enough_money"/>
-<fmt:message key="client.order.error_message.not_fount_trainer" var="not_found_trainer"/>
-<fmt:message key="client.order.message.thank" var="thank"/>
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="https://kit.fontawesome.com/7d33ba923d.js" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>order</title>
+    <title>history</title>
 
     <link rel="stylesheet" href="static/styles/style.css">
 </head>
@@ -47,16 +42,8 @@
     <div class="position-logo">
         <a href="controller?command=showMainPage"><img src="img/logo1.png" alt=""></a>
     </div>
-    <div class="balance">
-        <p>BALANCE : </p>
-        <p> ${user.getBalance() } BYN</p>
-        <a href="controller?command=showCashIn">
-            <button type="" class="top-up">Пополнить</button>
-        </a>
-    </div>
     <div class="position-menu-header">
         <form method="post" action="controller?command=languageChange">
-
             <div class="language">
                 <div class="position-ru">
                     <button type="submit" name="locale" value="ru_RU" class="form-button-ru">RU</button>
@@ -81,77 +68,44 @@
 
     <div class="fitnes-menu">
         <div class="position-button-programm">
-            <a href="controller?command=program">
-                <button type="submit" class="form-button">${myprogram}</button>
+            <a href="#">
+                <button type="submit" class="form-button">clients</button>
             </a>
         </div>
         <div class="button-order-position">
             <a href="#">
-                <button type="submit" class="form-button">${order}</button>
+                <button type="submit" class="form-button">feedback</button>
             </a>
         </div>
-        <div class="position-button-history">
-            <a href="controller?command=history">
-                <button type="submit" class="form-button">${history}</button>
+        <div class="button-order-position">
+            <a href="controller?command=showOrders">
+                <button type="submit" class="form-button">orders</button>
             </a>
         </div>
     </div>
-    <div class="order">
-        <p>
-            ${customHeader}
-        </p>
-        <form action="controller?command=calculateOrderPrice" method="post">
-            <div class="form-order">
-                <input class="form-input-order" type="number" min="1" max="100" required="required"
-                       name="trainingCount">
-            </div>
-            <div>
-                <input class="trainer-checkbox" type="checkbox" name="personalTrainer" value="true">
-                ${personal}
-            </div>
-            <div class="position-calculate-button">
-                <button type="submit" class="buttton-calculate-cost">${calculate}</button>
-            </div>
-        </form>
-        <c:if test="${orderCoast == null}">
-            <div class="workout-counter">
-                0 BYN
-            </div>
-        </c:if>
-        <c:if test="${orderCoast != null}">
-            <div class="workout-counter">
-                    ${orderCoast} BYN
-            </div>
-            <form action="controller?command=createOrder" method="post">
-                <div class="position-pay-button">
-                    <button class="buttton-calculate-cost" type="submit">${pay}</button>
-                </div>
-            </form>
-            <c:if test="${notEnoughMoney == true}">
-                <div>
-                        ${not_enough_money}
-                </div>
-            </c:if>
-            <c:if test="${notEnoughMoney == false and trainerNotFound == false and hasOrder == false}">
-                <div>
-                        ${thank}
-                </div>
-            </c:if>
-            <c:if test="${trainerNotFound == true}">
-                <div>
-                        ${not_found_trainer}
-                </div>
-            </c:if>
-            <c:if test="${hasOrder == true}">
-                <div>
-                    You have order!
-                </div>
-            </c:if>
+    <div class="program-list">
+        <div class="list-information">
+            <c:if test="${!clientList.isEmpty()}">
+            <c:forEach var="position" begin="0" end="${clientList.size() - 1}" step="1">
+                <a href="controller?command=showClientInfo&clientId=${clientList.get(position).id}" class="list-information-link">
+                    <div class="client-name">
+                          <span class="list-information-date start-date">
+                                  ${clientList.get(position).name}
+                          </span>
+                        <span class="d">f</span>
+                        <span class="list-information-date end-date">
+                                ${clientList.get(position).surname}
+                        </span>
+                    </div>
 
-        </c:if>
+                </a>
+            </c:forEach>
+            </c:if>
+            <c:if test="${clientList.isEmpty()}">
+                <div class="list-information-date start-date"> Нет клиентов :( </div>
+            </c:if>
+        </div>
     </div>
-
-
 </main>
 <div class="line">
 

@@ -1,5 +1,8 @@
-package com.epam.webapp.command;
+package com.epam.webapp.command.client;
 
+import com.epam.webapp.command.Command;
+import com.epam.webapp.command.CommandResult;
+import com.epam.webapp.constant.SessionConstant;
 import com.epam.webapp.entity.Client;
 import com.epam.webapp.entity.Entity;
 import com.epam.webapp.entity.Trainer;
@@ -12,27 +15,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ShowMainPageCommand implements Command {
+public class ShowMainCommand implements Command {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final TrainerService service = new TrainerService();
 
     private static final String CLIENT_MAIN_PAGE = "WEB-INF/jsp/client/main.jsp";
+    private static final String TRAINER_MAIN_PAGE = "WEB-INF/jsp/trainer/main.jsp";
     private static final String LOGIN_PARAMETER = "login";
-    private static final String USER_ATTRIBUTE = "user";
 
     @Override
     public CommandResult execute(HttpServletRequest req, HttpServletResponse resp) throws ServiceException {
         HttpSession session = req.getSession();
-        Entity entity = (Entity) session.getAttribute(USER_ATTRIBUTE);
+        Entity entity = (Entity) session.getAttribute(SessionConstant.USER);
         String name = "";
-        if (entity instanceof Client) {
-            name = ((Client) entity).getName();
-        } else if (entity instanceof Trainer) {
-            name = ((Trainer) entity).getName();
+        String currentPage = "";
+        if (entity instanceof Client client) {
+            name = client.getName();
+            currentPage = CLIENT_MAIN_PAGE;
+        } else if (entity instanceof Trainer trainer) {
+            name = trainer.getName();
+            currentPage = TRAINER_MAIN_PAGE;
         }
-        session.setAttribute("name", name);
-        return CommandResult.forward(CLIENT_MAIN_PAGE);
+        session.setAttribute(SessionConstant.NAME, name);
+        return CommandResult.forward(currentPage);
     }
 }
